@@ -29,7 +29,6 @@
     box-sizing: border-box;
     border-radius: 5px;
     padding: 14px;
-    width: 325px;
     outline: none;
     cursor: pointer;
     font-family: Manrope;

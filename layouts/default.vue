@@ -1,8 +1,10 @@
 <template>
   <div>
+
     <div class="el-wrapper">
       <nuxt/>
     </div>
+
     <Footer/>
   </div>
 </template>
@@ -31,6 +33,10 @@
     url(~assets/fonts/Manrope.ttf) format("truetype");
   }
 
+  .el-ml20 {
+    margin-left: 20px;
+  }
+
   html, body {
     margin: 0;
     padding: 0;
@@ -38,6 +44,7 @@
 
   a {
     text-decoration: none;
+    display: contents;
   }
 
   .el-wrapper {
@@ -51,7 +58,7 @@
     min-height: calc(100vh - 207px);
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 768px) {
     .el-wrapper {
       display: flex;
       flex-direction: column;

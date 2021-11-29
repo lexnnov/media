@@ -36,7 +36,7 @@
     padding: 0 90px;
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 768px) {
     .el-footer__copyright {
       width: 100%;
       margin: 0 auto;

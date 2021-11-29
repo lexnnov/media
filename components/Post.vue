@@ -65,10 +65,6 @@
     font-family: Manrope;
   }
 
-  .el-post a {
-    display: contents;
-  }
-
   .el-post__image img {
     height: 100%;
     width: 100%;
@@ -134,7 +130,7 @@
     color: rgba(60, 60, 67, 0.6);
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 768px) {
     .el-post {
       display: flex;
       flex-direction: row-reverse;

@@ -40,9 +40,13 @@
     line-height: 24px;
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 768px) {
     .el-header__logo {
       display: none;
+    }
+
+    .el-header__right {
+      width: 100%;
     }
   }
 </style>

@@ -13,7 +13,7 @@
 		},
 		computed: {
 			src () {
-				const src = require(`assets/${this.name}.svg?raw`)
+				const src = require(`assets/svg/${this.name}.svg?raw`)
 				return src
 			}
 		}

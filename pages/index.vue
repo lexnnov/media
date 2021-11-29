@@ -3,10 +3,12 @@
 
     <page-header>
       <template slot="right">
+
         <div class="el-page__search">
           <input class="el-page__search-input" placeholder="Поиск" v-model="search"/>
           <el-icon class="el-page__search-icon" name="search"></el-icon>
         </div>
+
       </template>
     </page-header>
 
@@ -114,9 +116,14 @@
     margin-top: 30px;
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 768px) {
     .el-page {
       max-width: 100%;
+    }
+
+    .el-page__search-input {
+      width: 100%;
+      height: 36px;
     }
 
     .el-page__pagination {

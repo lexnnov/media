@@ -38,7 +38,7 @@
 
       <div class="el-post-page__buttons" v-if="isEdit">
         <el-button :on-click="savePost" >Сохранить изменения</el-button>
-        <el-button :on-click="cancelPost" ghost style="margin-left: 30px">Отменить</el-button>
+        <el-button class="el-ml20" :on-click="cancelPost" ghost>Отменить</el-button>
       </div>
 
     </div>
@@ -147,7 +147,7 @@
     align-items: center;
     letter-spacing: -0.02em;
     border-bottom: 1px solid #D1D1D6;
-    padding: 15px 0;
+    padding: 25px 0;
   }
 
   .el-post-page__description {
@@ -199,7 +199,7 @@
     outline: none;
   }
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 768px) {
     .el-post-page__image--desktop {
       display: none;
     }
@@ -213,7 +213,7 @@
 
     .el-post-page__buttons .el-button {
       margin-bottom: 10px;
-      margin-left: 0!important;
+      margin-left: 0;
       width: 100%;
     }
 
