@@ -1,26 +1,28 @@
 <template>
   <div class="el-comment">
-
     <div class="el-comment__left">
       <img
         class="el-comment__avatar"
         src="https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png"
-      />
+      >
     </div>
 
     <div class="el-comment__right">
-      <div class="el-comment__username">{{comment.name}}</div>
-      <div class="el-comment__content">{{comment.body}}</div>
+      <div class="el-comment__username">
+        {{ comment.name }}
+      </div>
+      <div class="el-comment__content">
+        {{ comment.body }}
+      </div>
     </div>
-
   </div>
 </template>
 
 <script>
-	export default {
-		name: 'Comment',
-    props: ['comment']
-	}
+export default {
+	name: 'Comment',
+	props: ['comment']
+}
 </script>
 
 <style scoped>

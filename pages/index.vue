@@ -1,79 +1,75 @@
 <template>
   <div class="el-page">
-
     <page-header>
       <template slot="right">
-
         <div class="el-page__search">
-          <input class="el-page__search-input" placeholder="Поиск" v-model="search"/>
-          <el-icon class="el-page__search-icon" name="search"></el-icon>
+          <input v-model="search" class="el-page__search-input" placeholder="Поиск">
+          <el-icon class="el-page__search-icon" name="search" />
         </div>
-
       </template>
     </page-header>
 
-    <div class="el-page__posts" v-if="isPosts">
-      <post :key="post.id" :post="post" style="margin-bottom: 30px" v-for="post in posts"></post>
+    <div v-if="isPosts" class="el-page__posts">
+      <post v-for="post in posts" :key="post.id" :post="post" style="margin-bottom: 30px" />
     </div>
 
     <div v-else>
       По вашему запросу ничего не найдено
     </div>
 
-    <div class="el-page__pagination" v-if="totalCount > 0">
-      <pagination :current="currentPage" :pageClick="pageChange" :pages="pagesCount"></pagination>
+    <div v-if="totalCount > 0" class="el-page__pagination">
+      <pagination :current="currentPage" :page-click="pageChange" :pages="pagesCount" />
     </div>
   </div>
-
 </template>
 
 <script>
-	import { mapGetters, mapActions } from 'vuex'
-	import Post from '~/components/Post'
-	import Pagination from '~/components/Pagination'
-	import ElIcon from '~/components/ElIcon'
-	import PageHeader from '~/components/PageHeader'
+import {mapGetters, mapActions} from 'vuex'
+import Post from '~/components/Post'
+import Pagination from '~/components/Pagination'
+import ElIcon from '~/components/ElIcon'
+import PageHeader from '~/components/PageHeader'
 
-	export default {
-		components: {
-			PageHeader,
-			ElIcon,
-			Pagination,
-			Post
-		},
-		computed: {
-			...mapGetters({
-				posts: 'posts/items',
-				totalCount: 'posts/totalCount',
-				currentPage: 'posts/page'
-			}),
-			search: {
-				get () {
-					return this.$store.getters['posts/search']
-				},
-				set (val) {
-					this.$store.dispatch('posts/updateSearch', val)
-				}
+export default {
+	components: {
+		PageHeader,
+		ElIcon,
+		Pagination,
+		Post
+	},
+	computed: {
+		...mapGetters({
+			posts: 'posts/items',
+			totalCount: 'posts/totalCount',
+			currentPage: 'posts/page'
+		}),
+		search: {
+			get() {
+				return this.$store.getters['posts/search']
 			},
-			isPosts () {
-				return this.posts.length > 0
-			},
-			pagesCount () {
-				return Math.ceil(this.totalCount / 10)
+			set(val) {
+				this.$store.dispatch('posts/updateSearch', val)
 			}
 		},
-		methods: {
-			...mapActions({
-				setPage: 'posts/setPage'
-			}),
-			pageChange (page) {
-				this.setPage(page)
-			}
+		isPosts() {
+			return this.posts.length > 0
 		},
-		mounted () {
-			this.$store.dispatch('posts/getAll')
+		pagesCount() {
+			return Math.ceil(this.totalCount / 10)
 		}
+	},
+	methods: {
+		...mapActions({
+			setPage: 'posts/setPage'
+		}),
+		pageChange(page) {
+			this.setPage(page)
+		}
+	},
+	mounted() {
+		this.$store.dispatch('posts/getAll')
 	}
+}
 </script>
 
 <style>

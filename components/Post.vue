@@ -28,8 +28,8 @@
           </div>
 
           <nuxt-link :key="post.id" :to="{path: `post/${post.id}`, query: {isEdit: true }}">
-            <div style="margin-left: 34px">
-              <el-icon class="el-post__edit" name="pen"></el-icon>
+            <div class="el-post__edit">
+              <el-icon  name="pen"></el-icon>
             </div>
           </nuxt-link>
 
@@ -87,6 +87,10 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     font-weight: bold;
+  }
+
+  .el-post__edit {
+    margin-left: 35px
   }
 
   .el-post__edit:hover svg path{

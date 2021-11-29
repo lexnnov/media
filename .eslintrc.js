@@ -15,8 +15,10 @@ module.exports = {
 	plugins: [],
 	// add your custom rules here
 	rules: {
-		indent: ['off', 'tab', { SwitchCase: 1 }],
-		'no-tabs': 0,
-		'no-trailing-spaces': ["off"]
+		indent: ['warn', 'tab', { SwitchCase: 1 }],
+		'no-tabs': 'off',
+		'no-trailing-spaces': ['off'],
+		'object-curly-spacing': ['off'],
+		'space-before-function-paren': ['off']
 	}
 }

@@ -5,19 +5,19 @@
 </template>
 
 <script>
-	export default {
-		name: 'ElButton',
-		props: {
-			onClick: {
-				type: Function,
-				required: false
-			},
-			ghost: {
-				type: Boolean,
-				required: false
-			}
+export default {
+	name: 'ElButton',
+	props: {
+		onClick: {
+			type: Function,
+			required: false
+		},
+		ghost: {
+			type: Boolean,
+			required: false
 		}
 	}
+}
 </script>
 
 <style lang="css" scoped>

@@ -1,17 +1,15 @@
 <template>
-  <div class="el-post-page" v-if="post">
-
+  <div v-if="post" class="el-post-page">
     <page-header>
       <template slot="right">
         <nuxt-link :to="{path: `/`}">
           <el-link>
             <template slot="icon">
-              <el-icon name="posts"/>
+              <el-icon name="posts" />
             </template>
             Посты
           </el-link>
         </nuxt-link>
-
       </template>
     </page-header>
 
@@ -20,99 +18,101 @@
       <img class="el-post-page__image--mobile" src="../../assets/Saly-16_mobile.png">
     </div>
 
-    <div class="el-post-page__title">{{post.title}}</div>
-
-    <div class="el-post-page__description">
-      <pre v-html="content" v-if="!isEdit"></pre>
-      <textarea :disabled="!isEdit" class="el-textarea" v-else v-model="content"/>
+    <div class="el-post-page__title">
+      {{ post.title }}
     </div>
 
-    <div style="margin-top: 30px; display: flex">
+    <div class="el-post-page__description">
+      <pre v-if="!isEdit" v-html="content" />
+      <textarea v-else v-model="content" :disabled="!isEdit" class="el-post-page__description-textarea" />
+    </div>
 
-      <el-link :on-click="editPost" v-if="!isEdit">
+    <div class="el-post-page__controls">
+      <el-link v-if="!isEdit" :on-click="editPost">
         <template slot="icon">
-          <el-icon name="pen"/>
+          <el-icon name="pen" />
         </template>
         Редактировать текст
       </el-link>
 
-      <div class="el-post-page__buttons" v-if="isEdit">
-        <el-button :on-click="savePost" >Сохранить изменения</el-button>
-        <el-button class="el-ml20" :on-click="cancelPost" ghost>Отменить</el-button>
+      <div v-if="isEdit" class="el-post-page__buttons">
+        <el-button :on-click="savePost">
+          Сохранить изменения
+        </el-button>
+        <el-button :on-click="cancelPost" class="el-ml20" ghost>
+          Отменить
+        </el-button>
       </div>
-
     </div>
 
     <div v-if="comments.length > 0">
       <h1>Комментарии</h1>
-      <comment :comment="comment" :key="comment.id" v-for="comment in comments"/>
+      <comment v-for="comment in comments" :key="comment.id" :comment="comment" />
     </div>
-
   </div>
-
 </template>
 
 <script>
-	import { mapGetters } from 'vuex'
-	import Comment from '~/components/Comment'
-	import ElButton from '~/components/ElButton'
-	import ElLink from '~/components/ElLink'
-	import ElIcon from '~/components/ElIcon'
-	import PageHeader from '~/components/PageHeader'
+import {mapGetters} from 'vuex'
+import Comment from '~/components/Comment'
+import ElButton from '~/components/ElButton'
+import ElLink from '~/components/ElLink'
+import ElIcon from '~/components/ElIcon'
+import PageHeader from '~/components/PageHeader'
 
-	export default {
-		name: 'post',
-		components: {
-			PageHeader,
-			ElIcon,
-			ElLink,
-			ElButton,
-			Comment
-		},
-		data () {
-			return {
-				isEdit: false,
-				initBody: ''
-			}
-		},
-		computed: {
-			...mapGetters({
-				post: 'posts/item',
-				comments: 'comments/items'
-			}),
-			content: {
-				get () {
-					return this.$store.getters['posts/item'].body || ''
-				},
-				set (val) {
-					this.$store.dispatch('posts/updateItem', { body: val })
-				}
-			}
-		},
-		methods: {
-			editPost () {
-				this.isEdit = true
+export default {
+	name: 'Post',
+	components: {
+		PageHeader,
+		ElIcon,
+		ElLink,
+		ElButton,
+		Comment
+	},
+	data() {
+		return {
+			isEdit: false,
+			initBody: ''
+		}
+	},
+	async fetch({store, route}) {
+		await store.dispatch('posts/getOne', route.params.id)
+		await store.dispatch('comments/getAll', {id: route.params.id})
+	},
+	computed: {
+		...mapGetters({
+			post: 'posts/item',
+			comments: 'comments/items'
+		}),
+		content: {
+			get() {
+				return this.$store.getters['posts/item'].body || ''
 			},
-			savePost () {
-				this.isEdit = false
-				this.$store.dispatch('posts/updateItem', { body: this.content })
-				this.$store.dispatch('posts/savePost')
-				this.initBody = this.content
-			},
-			cancelPost () {
-				this.$store.dispatch('posts/updateItem', { body: this.initBody })
-				this.isEdit = false
+			set(val) {
+				this.$store.dispatch('posts/updateItem', {body: val})
 			}
+		}
+	},
+	mounted() {
+		this.isEdit = this.$route.query.isEdit
+		this.initBody = this.$store.getters['posts/item'].body
+	},
+	methods: {
+		editPost() {
+			this.isEdit = true
 		},
-		mounted () {
-			this.isEdit = this.$route.query.isEdit
-			this.initBody = this.$store.getters['posts/item'].body
+		savePost() {
+			this.isEdit = false
+			this.$store.dispatch('posts/updateItem', {body: this.content})
+			this.$store.dispatch('posts/savePost')
+			this.initBody = this.content
 		},
-		async fetch ({ store, route }) {
-			await store.dispatch('posts/getOne', route.params.id)
-			await store.dispatch('comments/getAll', { id: route.params.id })
+		cancelPost() {
+			this.$store.dispatch('posts/updateItem', {body: this.initBody})
+			this.isEdit = false
 		}
 	}
+}
 </script>
 
 <style scoped>
@@ -129,13 +129,13 @@
     height: 285px;
   }
 
+  .el-post-page__image--mobile {
+    display: none;
+  }
+
   .el-post-page__buttons {
     display: flex;
     flex-wrap: wrap;
-  }
-
-  .el-post-page__image--mobile {
-    display: none;
   }
 
   .el-post-page__title {
@@ -181,17 +181,22 @@
     resize: vertical;
   }
 
+  .el-post-page__controls {
+    margin-top: 30px;
+    display: flex
+  }
+
   .el-post-page__image img {
     height: 100%;
     width: 100%;
     object-fit: none;
   }
 
-  .el-textarea {
+  .el-post-page__description-textarea {
     height: 300px;
   }
 
-  .el-textarea:disabled {
+  .el-post-page__description-textarea:disabled {
     padding: 0;
     border: none;
     background-color: transparent;

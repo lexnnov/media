@@ -1,23 +1,22 @@
 <template>
   <div>
-
     <div class="el-wrapper">
-      <nuxt/>
+      <nuxt />
     </div>
 
-    <Footer/>
+    <Footer />
   </div>
 </template>
 
 <script>
-	import Footer from '~/components/Footer'
+import Footer from '~/components/Footer'
 
-	export default {
-		name: 'default',
-		components: {
-			Footer
-		}
+export default {
+	name: 'Default',
+	components: {
+		Footer
 	}
+}
 </script>
 
 <style>

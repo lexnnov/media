@@ -5,7 +5,6 @@ export const state = () => ({
 })
 
 export const getters = {
-
 	items: state => state.items,
 	commentsTotal: state => state.item ? state.item.commentsTotal : 0,
 	totalCount: state => state.totalCount,
@@ -13,14 +12,14 @@ export const getters = {
 }
 
 export const actions = {
-	async getAll ({ state, commit }, { id }) {
-		const { data } = await this.$axios.get(`/posts/${id}/comments`)
+	async getAll({state, commit}, {id}) {
+		const {data} = await this.$axios.get(`/posts/${id}/comments`)
 		commit('SET_ITEMS', data)
 	}
 }
 
 export const mutations = {
-	SET_ITEMS (state, payload) {
+	SET_ITEMS(state, payload) {
 		state.items = payload
 	}
 }

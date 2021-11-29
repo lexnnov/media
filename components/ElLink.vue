@@ -1,30 +1,28 @@
 <template>
-  <div @click="onClick" class="el-link">
-
+  <div class="el-link" @click="onClick">
     <div class="el-link__icon">
-      <slot name="icon"></slot>
+      <slot name="icon" />
     </div>
 
     <div class="el-link__content">
-      <slot></slot>
+      <slot />
     </div>
-
   </div>
 </template>
 
 <script>
-	export default {
-		name: 'ElLink',
-		props: {
-			onClick: {
-				type: Function,
-				required: false,
-				default: () => {
-					return false
-				}
+export default {
+	name: 'ElLink',
+	props: {
+		onClick: {
+			type: Function,
+			required: false,
+			default: () => {
+				return false
 			}
 		}
 	}
+}
 </script>
 
 <style>
