@@ -1,6 +1,5 @@
 <template>
   <div class="el-post">
-
     <nuxt-link :key="post.id" :to="{path: `post/${post.id}`}">
       <div class="el-post__image">
         <img class="el-post__image--desktop" src="../assets/Saly-9.png">
@@ -8,31 +7,28 @@
       </div>
 
       <div class="el-post__content">
-
         <div class="el-post__title">
-          {{post.title}}
+          {{ post.title }}
         </div>
 
         <div class="el-post__description">
-          {{post.body}}
+          {{ post.body }}
         </div>
 
         <div class="el-post__footer">
-
           <div class="el-post__footer-comments">
-            <el-icon name="comment"></el-icon>
+            <el-icon name="comment" />
 
-            <div class="el-post__footer-comments__counter" >
-              {{post.comments.length}}
+            <div class="el-post__footer-comments__counter">
+              {{ post.comments.length }}
             </div>
           </div>
 
           <nuxt-link :key="post.id" :to="{path: `post/${post.id}`, query: {isEdit: true }}">
             <div class="el-post__edit">
-              <el-icon  name="pen"></el-icon>
+              <el-icon name="pen" />
             </div>
           </nuxt-link>
-
         </div>
       </div>
     </nuxt-link>
@@ -40,13 +36,12 @@
 </template>
 
 <script>
-	import ElIcon from '~/components/ElIcon'
-	export default {
-		name: 'Post',
-		components: { ElIcon },
-		props: ['post'],
-		computed: {}
-	}
+import ElIcon from '~/components/ElIcon'
+export default {
+	name: 'Post',
+	components: { ElIcon },
+	props: ['post']
+}
 </script>
 
 <style>

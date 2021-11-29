@@ -1,27 +1,24 @@
 <template>
   <header class="el-header">
-
     <div class="el-header__logo">
       Logo
     </div>
 
     <div class="el-header__right">
-      <slot name="right">
-      </slot>
+      <slot name="right" />
     </div>
-
   </header>
 </template>
 
 <script>
-	export default {
-		name: 'PageHeader',
-		data () {
-			return {
-				search: ''
-			}
+export default {
+	name: 'PageHeader',
+	data () {
+		return {
+			search: ''
 		}
 	}
+}
 </script>
 
 <style scoped>
